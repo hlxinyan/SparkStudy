@@ -1,15 +1,25 @@
 package com.lily.study;
 
 import com.lily.study.entity.Forecast;
+import com.lily.study.entity.Score;
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
+import org.apache.spark.api.java.function.PairFunction;
+import org.apache.spark.broadcast.Broadcast;
 import org.apache.spark.sql.SparkSession;
+import scala.Tuple2;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class TopN {
 
+	private static Broadcast<Integer> topNum;
+
 	public static void main(String[] args) {
 
-		SparkSession spark = SparkSession
 		
              SparkSession spark = SparkSession
                 .builder()
@@ -18,13 +28,13 @@ public class TopN {
 
         Integer num=5;
 
-        JavaSparkContext javaSparkContext=JavaSparkContext.fromSparkContext(spark.sparkContext());
+        JavaSparkContext javaSparkContext= JavaSparkContext.fromSparkContext(spark.sparkContext());
 
         topNum =javaSparkContext.broadcast(num);
 
 
 
-        JavaRDD<String> lines = javaSparkContext.textFile("D:/Work/BigData/Sample/groupTop.csv");
+        JavaRDD<String> lines = javaSparkContext.textFile("file:///Users/lilyhuang/Documents/test.csv");
 
         JavaRDD<Score> scoreJavaRDD = lines.map(new Function<String, Score>() {
             @Override
@@ -65,5 +75,5 @@ public class TopN {
 
         System.out.println(result.collect());
     }
->>>>>>> 59d52e4f8e3ce92759a6d86f0d0f912035ad33cf
+
 }

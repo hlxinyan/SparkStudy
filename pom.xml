@@ -8,8 +8,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <scala.binary.version>2.10</scala.binary.version>
-        <spark.version>2.2.1</spark.version>
+        <scala.binary.version>2.11</scala.binary.version>
+        <spark.version>2.1.2</spark.version>
         <hbase.version>1.1.1</hbase.version>
         <hadoop2.version>2.6.1</hadoop2.version>
         <build.application.finalName>spark-learning-${version}</build.application.finalName>
@@ -17,32 +17,73 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_${scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-            <scope>provided</scope>
+            <groupId>org.spark-project.spark</groupId>
+            <artifactId>unused</artifactId>
+            <version>1.0.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
-            <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka-0-10_${scala.binary.version}</artifactId>
+            <artifactId>spark-streaming_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-hive_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-graphx_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-flume_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-kafka-0-8_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql-kafka-0-10_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.scalacheck</groupId>
+            <artifactId>scalacheck_${scala.binary.version}</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.scopt</groupId>
+            <artifactId>scopt_${scala.binary.version}</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.twitter</groupId>
+            <artifactId>parquet-hadoop-bundle</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -138,7 +179,6 @@
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-server</artifactId>
             <version>${hbase.version}</version>
-
             <exclusions>
                 <exclusion>
                     <!-- <!– SPARK-4455 –>-->
