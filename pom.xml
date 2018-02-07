@@ -9,9 +9,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.binary.version>2.11</scala.binary.version>
-        <spark.version>2.1.2</spark.version>
+        <spark.version>2.1.0</spark.version>
         <hbase.version>1.1.1</hbase.version>
         <hadoop2.version>2.6.1</hadoop2.version>
+        <spark-scope>provided</spark-scope>
         <build.application.finalName>spark-learning-${version}</build.application.finalName>
     </properties>
     <dependencies>
@@ -25,64 +26,39 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+			<scope>${spark-scope}</scope>
         </dependency>
+
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_${scala.binary.version}</artifactId>
+            <artifactId>spark-sql_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+           <scope>${spark-scope}</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-mllib_${scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-hive_${scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-graphx_${scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-flume_${scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka-0-8_${scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql-kafka-0-10_${scala.binary.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
+
+      <!--<dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
-        </dependency>
+            <version>3.3</version>
+        </dependency>-->
         <dependency>
             <groupId>org.scalacheck</groupId>
-            <artifactId>scalacheck_${scala.binary.version}</artifactId>
+            <artifactId>scalacheck_2.11</artifactId>
+            <version>1.13.1</version>
+			<scope>${spark-scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
-            <scope>provided</scope>
+			<version>2.11.8</version>
+            <scope>${spark-scope}</scope>
         </dependency>
-        <dependency>
-            <groupId>com.github.scopt</groupId>
-            <artifactId>scopt_${scala.binary.version}</artifactId>
-            <version>3.3.0</version>
-        </dependency>
+
         <dependency>
             <groupId>com.twitter</groupId>
             <artifactId>parquet-hadoop-bundle</artifactId>
-            <scope>provided</scope>
+			<version>1.6.0</version>
+           <scope>${spark-scope}</scope>
         </dependency>
 
         <dependency>
@@ -91,7 +67,7 @@
             <version>14.0.1</version>
         </dependency>
 
-        <dependency>
+       <!-- <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
             <version>2.4.2</version>
@@ -101,166 +77,21 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.5</version>
-        </dependency>
+        </dependency>-->
 
 
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka_2.11</artifactId>
-            <version>0.10.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-clients</artifactId>
-            <version>0.10.0.1</version>
-        </dependency>
-
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.31</version>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-testing-util</artifactId>
-            <version>${hbase.version}</version>
 
-            <exclusions>
-                <exclusion>
-                    <!--  <!– SPARK-4455 –>-->
-                    <groupId>org.apache.hbase</groupId>
-                    <artifactId>hbase-annotations</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jruby</groupId>
-                    <artifactId>jruby-complete</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-protocol</artifactId>
-            <version>${hbase.version}</version>
 
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-common</artifactId>
-            <version>${hbase.version}</version>
 
-            <exclusions>
-                <exclusion>
-                    <!-- <!– SPARK-4455 –>-->
-                    <groupId>org.apache.hbase</groupId>
-                    <artifactId>hbase-annotations</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-client</artifactId>
-            <version>${hbase.version}</version>
 
-            <exclusions>
-                <exclusion>
-                    <!--     <!– SPARK-4455 –>-->
-                    <groupId>org.apache.hbase</groupId>
-                    <artifactId>hbase-annotations</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-server</artifactId>
-            <version>${hbase.version}</version>
-            <exclusions>
-                <exclusion>
-                    <!-- <!– SPARK-4455 –>-->
-                    <groupId>org.apache.hbase</groupId>
-                    <artifactId>hbase-annotations</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-client</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-mapreduce-client-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-auth</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-annotations</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-hdfs</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.hbase</groupId>
-                    <artifactId>hbase-hadoop1-compat</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-math</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-server</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-json</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-hadoop-compat</artifactId>
-            <version>${hbase.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-hadoop-compat</artifactId>
-            <version>${hbase.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
 
-        <dependency>
+   <!--     <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
             <version>${hadoop2.version}</version>
@@ -275,19 +106,41 @@
                     <artifactId>jets3t</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+       <!-- <dependency>
             <groupId>org.spark-project.hive</groupId>
             <artifactId>hive-exec</artifactId>
             <version>1.2.1.spark2</version>
-        </dependency>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spark-core_2.10</artifactId>
+                    <groupId>org.apache.spark</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spark-network-common_2.10</artifactId>
+                    <groupId>org.apache.spark</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spark-network-shuffle_2.10</artifactId>
+                    <groupId>org.apache.spark</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>akka-remote_2.10</artifactId>
+                    <groupId>org.spark-project.akka</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>akka-actor_2.10</artifactId>
+                    <groupId>org.spark-project.akka</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>2.1</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -335,42 +188,6 @@
                         <goals>
                             <goal>single</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>copy-overwrite-files</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target name="copy">
-                                <copy file="target/${artifactId}-${version}-jar-with-dependencies.jar"
-                                      todir="target/${build.application.finalName}/streaming/lib" overwrite="false"></copy>
-
-                                <tar destfile="target/${build.application.finalName}.tar.gz"
-                                     compression="gzip">
-                                    <tarfileset dir="target/${build.application.finalName}" filemode="755"
-                                                dirmode="774">
-                                        <include name="learning/bin/**"/>
-
-                                    </tarfileset>
-                                    <tarfileset dir="target/${build.application.finalName}" filemode="664"
-                                                dirmode="774">
-                                        <include name="**/*"/>
-                                        <exclude name="learning/bin/**"/>
-                                    </tarfileset>
-                                </tar>
-                          </target>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

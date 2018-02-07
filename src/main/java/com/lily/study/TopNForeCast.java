@@ -16,25 +16,28 @@ import java.util.Collections;
 
 public class TopNForeCast {
 
-	private static Broadcast<Integer> topNum;
 
 	public static void main(String[] args) {
 
 
              SparkSession spark = SparkSession
                 .builder()
-                .appName("TopN").master("local[*]").config("spark.testing.memory", "2147480000")
+                .appName("TopN").config("spark.testing.memory", "2147480000")//.master("local[*]")
                 .getOrCreate();
+
+
+
 
         Integer num=5;
 
         JavaSparkContext javaSparkContext= JavaSparkContext.fromSparkContext(spark.sparkContext());
 
-        topNum =javaSparkContext.broadcast(num);
+        Broadcast<Integer> topNum =javaSparkContext.broadcast(num);
 
+        //ip-10-211-221-7.ap-northeast-2.compute.internal:8020
+     //hdfs://ip-10-211-221-7.ap-northeast-2.compute.internal:8020/user/mercury/scm-output/scm_forecast_demand_forecast/20180202/forecast_national.csv
 
-
-        JavaRDD<String> lines = javaSparkContext.textFile("file:///Users/lilyhuang/temp/forecast_national.csv");
+        JavaRDD<String> lines = javaSparkContext.textFile(args[0]);
 
         JavaRDD<Forecast> scoreJavaRDD = lines.map(new Function<String, Forecast>() {
             @Override
@@ -62,6 +65,9 @@ public class TopNForeCast {
 
             String key= v1._1();
             ArrayList list= com.google.common.collect.Lists.newArrayList(v1._2());
+             if(list ==null){
+                  return null;
+             }
             Collections.sort(list);
             int index=Math.min(topNum.getValue(),list.size());
 
@@ -72,9 +78,16 @@ public class TopNForeCast {
            }
 
             return new Tuple2<>(key, list2);
-        });
+        }).filter(new Function<Tuple2<String, ArrayList<Forecast>>, Boolean>() {
+           @Override
+           public Boolean call(Tuple2<String, ArrayList<Forecast>> v1) throws Exception {
+               return v1 !=null;
+           }
+       });
 
         System.out.println(result.collect());
+
+        javaSparkContext.stop();
     }
 
 }
