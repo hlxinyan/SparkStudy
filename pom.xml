@@ -9,11 +9,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.binary.version>2.11</scala.binary.version>
-<<<<<<< HEAD
-        <spark.version>2.2.1</spark.version>
-=======
         <spark.version>2.1.0</spark.version>
->>>>>>> 5082ac64c42c2518ec578844acfd7e91bd3c012a
         <hbase.version>1.1.1</hbase.version>
         <hadoop2.version>2.6.1</hadoop2.version>
         <spark-scope>provided</spark-scope>
