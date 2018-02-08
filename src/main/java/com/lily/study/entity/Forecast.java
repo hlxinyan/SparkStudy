@@ -173,20 +173,6 @@ public class Forecast implements  Comparable<Forecast>,java.io.Serializable {
 			'}';
 	}
 
-	public static void main(String[] args){
-      String test="100704,Books,Children Books,10,35,\"0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0\",\"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\",0.0,0,0,1,national,No sales,HALT_PRODUCTION,0,0,0,0,0";
-
-
-     // List<String> stringList=Forecast.splitStr(test);
-
-		//System.out.println(stringList);
-
-		Forecast f=Forecast.parseForecast(test);
-
-		System.out.println(f);
-
-	}
-
 	@Override
 	public int compareTo(Forecast o) {
 
@@ -201,4 +187,20 @@ public class Forecast implements  Comparable<Forecast>,java.io.Serializable {
 
 
 	}
+
+	public static void main(String[] args){
+      String test="100704,Books,Children Books,10,35,\"0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0\",\"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\",0.0,0,0,1,national,No sales,HALT_PRODUCTION,0,0,0,0,0";
+
+
+     // List<String> stringList=Forecast.splitStr(test);
+
+		//System.out.println(stringList);
+
+		Forecast f=Forecast.parseForecast(test);
+
+		System.out.println(f);
+
+	}
+
+
 }
